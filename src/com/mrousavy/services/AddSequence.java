@@ -7,6 +7,12 @@ import javax.ws.rs.Produces;
  
 @Path("/addseq")
 public class AddSequence {
+	  @GET
+	  @Produces("application/xml")
+	  public String addDefault() {
+		  return addWithInput("0");
+	  }
+	  
 	  @Path("{s}")
 	  @GET
 	  @Produces("application/xml")

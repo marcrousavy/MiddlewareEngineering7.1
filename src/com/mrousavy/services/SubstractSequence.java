@@ -10,14 +10,20 @@ import org.json.JSONObject;
  
 @Path("/subseq")
 public class SubstractSequence {
+	  @GET
+	  @Produces("application/json")
+	  public Response subDefault() {
+		return subWithInput("0");  
+	  }
+	  
 	  @Path("{s}")
 	  @GET
 	  @Produces("application/json")
-	  public Response addWithInput(@PathParam("s") String input) {
+	  public Response subWithInput(@PathParam("s") String input) {
 		  String[] split = input.split(","); // Seperate by ","
-		  double total = 0;
-		  for (int i = 0; i < split.length; i++) { // Loop through each input
-			  total -= Double.valueOf(split[i].trim()); // Add each string
+		  double total = Double.valueOf(split[0]); // starting value is first value
+		  for (int i = 1; i < split.length; i++) { // Loop through each input
+			  total -= Double.valueOf(split[i].trim()); // Substract each value from "total", starting from index 1
 		  }
 
 		JSONObject jsonObject = new JSONObject(); // Build JSON Object from org.json
