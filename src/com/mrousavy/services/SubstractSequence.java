@@ -10,15 +10,15 @@ import org.json.JSONObject;
  
 @Path("/subseq")
 public class SubstractSequence {
-	  @GET
-	  @Produces("application/json")
+	  @GET // HTTP Get (= via URL) Metadata
+	  @Produces("application/json") // Result Metadata (application/json)
 	  public Response subDefault() {
 		return subWithInput("0");  
 	  }
 	  
-	  @Path("{s}")
-	  @GET
-	  @Produces("application/json")
+	  @Path("{s}") // Parameter alias
+	  @GET // HTTP Get (= via URL) Metadata
+	  @Produces("application/json") // Result Metadata (application/json)
 	  public Response subWithInput(@PathParam("s") String input) {
 		  String[] split = input.split(","); // Seperate by ","
 		  double total = Double.valueOf(split[0]); // starting value is first value
@@ -30,7 +30,7 @@ public class SubstractSequence {
 		jsonObject.put("Input", input); // Push_back to JSON
 		jsonObject.put("Output", total); // Push_back to JSON
  
-		String result = "@Produces(\"application/json\") Output: \n\nSubstract Sequence Service: \n\n" + jsonObject; // Actual JSON result
+		String result = "subWithInput(string) Output: \n\nSubstract Sequence Service: \n\n" + jsonObject; // Actual JSON result
 		return Response.status(200).entity(result).build(); // Status 200: OK	  
 	  }
 }

@@ -7,15 +7,15 @@ import javax.ws.rs.Produces;
  
 @Path("/addseq")
 public class AddSequence {
-	  @GET
+	  @GET // HTTP Get (= via URL) Metadata
 	  @Produces("application/xml")
 	  public String addDefault() {
 		  return addWithInput("0");
 	  }
 	  
-	  @Path("{s}")
-	  @GET
-	  @Produces("application/xml")
+	  @Path("{s}") // Parameter alias
+	  @GET // HTTP Get (= via URL) Metadata
+	  @Produces("application/xml") // Result Metadata (application/xml)
 	  public String addWithInput(@PathParam("s") String input) {
 		  String[] split = input.split(","); // Seperate by ","
 		  double total = 0;
@@ -23,7 +23,7 @@ public class AddSequence {
 			  total += Double.valueOf(split[i].trim()); // Add each string
 		  }
 
-			String result = "@Produces(\"application/xml\") Output: \n\nSequence Sum Output: \n\n" + total; // Build result with header
+			String result = "addWithInput(string) Output: \n\nSequence Sum Output: \n\n" + total; // Build result with header
 			return "<addseq>" + "<values>" + input + "</values><result>" + result + "</result>" + "</addseq>"; // Actual XML response	  
 	  }
 }
