@@ -15,34 +15,29 @@ import org.json.JSONObject;
  
 @Path("/ftoc")
 public class FahrenheitToCelsius {
- 
 	  @GET
 	  @Produces("application/json")
 	  public Response convertFtoC() throws JSONException {
+		JSONObject jsonObject = new JSONObject(); // Build JSON Object from org.json
+		Double fahrenheit = 98.24; // Default value
+		double celsius = (fahrenheit - 32)*5/9; // Actual calculation 
+		jsonObject.put("F Value", fahrenheit); // Push_back to JSON
+		jsonObject.put("C Value", celsius); // Push_back to JSON
  
-		JSONObject jsonObject = new JSONObject();
-		Double fahrenheit = 98.24;
-		Double celsius;
-		celsius = (fahrenheit - 32)*5/9; 
-		jsonObject.put("F Value", fahrenheit); 
-		jsonObject.put("C Value", celsius);
- 
-		String result = "@Produces(\"application/json\") Output: \n\nF to C Converter Output: \n\n" + jsonObject;
-		return Response.status(200).entity(result).build();
+		String result = "@Produces(\"application/json\") Output: \n\nF to C Converter Output: \n\n" + jsonObject; // Actual JSON result
+		return Response.status(200).entity(result).build(); // Status 200: OK
 	  }
  
 	  @Path("{f}")
 	  @GET
 	  @Produces("application/json")
 	  public Response convertFtoCfromInput(@PathParam("f") float f) throws JSONException {
+		JSONObject jsonObject = new JSONObject(); // Build JSON Object from org.json
+		float celsius =  (f - 32)*5/9; // Actual calculation (with floats)
+		jsonObject.put("F Value", f);  // Push_back to JSON
+		jsonObject.put("C Value", celsius); // Push_back to JSON
  
-		JSONObject jsonObject = new JSONObject();
-		float celsius;
-		celsius =  (f - 32)*5/9; 
-		jsonObject.put("F Value", f); 
-		jsonObject.put("C Value", celsius);
- 
-		String result = "@Produces(\"application/json\") Output: \n\nF to C Converter Output: \n\n" + jsonObject;
-		return Response.status(200).entity(result).build();
+		String result = "@Produces(\"application/json\") Output: \n\nF to C Converter Output: \n\n" + jsonObject; // Actual JSON result
+		return Response.status(200).entity(result).build(); // Status 200: OK
 	  }
 }
